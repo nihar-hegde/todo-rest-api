@@ -5,6 +5,7 @@ import {
   deleteTodoById,
   getAllTodos,
   getTodoById,
+  markDone,
 } from "../db/todos";
 
 const TodoSchema = z.object({
@@ -37,6 +38,16 @@ export const createTodoController = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: error });
+  }
+};
+
+export const markAsDone = async (req: Request, res: Response) => {
+  try {
+    const todoId = req.params.id;
+    const markAsDoneRes = await markDone(todoId);
+    res.status(200).json({ markAsDoneRes });
+  } catch (error) {
+    console.error(error);
   }
 };
 

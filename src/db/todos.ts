@@ -39,3 +39,10 @@ export const deleteTodoById = (id: string) =>
 
 export const updateTodoById = (id: string, value: Record<string, any>) =>
   TodoModel.findByIdAndUpdate(id, value);
+
+export const markDone = (id: string) =>
+  TodoModel.findByIdAndUpdate(
+    { _id: id },
+    { $set: { isDone: true } },
+    { new: true }
+  );
